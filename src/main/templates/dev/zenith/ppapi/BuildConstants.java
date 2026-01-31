@@ -1,4 +1,4 @@
-package dev.zenith.web;
+package dev.zenith.ppapi;
 
 // The constants are replaced before compilation
 public class BuildConstants {
