@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.zenith.Globals;
+import com.zenith.Proxy;
 import com.zenith.command.api.CommandContext;
 import com.zenith.command.api.CommandOutputHelper;
 import dev.zenith.ppapi.api.model.ApiErrorResponse;
@@ -125,7 +126,8 @@ public class PPApiServer {
                     result.pearls(),
                     result.output(),
                     botInfo.minecraftServer(),
-                    botInfo.botUsername()
+                    botInfo.botUsername(),
+                    botInfo.botConnected()
                 ));
                 ctx.status(200);
             })
@@ -235,6 +237,7 @@ public class PPApiServer {
     private BotInfo readZenithBotInfo() {
         String server = null;
         String username = null;
+        boolean connected = Proxy.getInstance().isConnected();
         var config = Globals.CONFIG;
         if (config != null) {
             if (config.authentication != null) {
@@ -247,11 +250,12 @@ public class PPApiServer {
                 }
             }
         }
-        return new BotInfo(server, username);
+        return new BotInfo(server, username, connected);
     }
 
     private record BotInfo(
         String minecraftServer,
-        String botUsername
+        String botUsername,
+        boolean botConnected
     ) { }
 }

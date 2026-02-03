@@ -6,5 +6,6 @@ public record PearlStatusResponse(
     List<String> pearls,
     List<String> output,
     String minecraftServer,
-    String botUsername
+    String botUsername,
+    boolean botConnected
 ) { }
