@@ -119,7 +119,13 @@ public class PPApiServer {
                     ctx.json(new ApiErrorResponse(result.error()));
                     return;
                 }
-                ctx.json(new PearlStatusResponse(result.pearls(), result.output()));
+                var botInfo = readZenithBotInfo();
+                ctx.json(new PearlStatusResponse(
+                    result.pearls(),
+                    result.output(),
+                    botInfo.minecraftServer(),
+                    botInfo.botUsername()
+                ));
                 ctx.status(200);
             })
             .post("/pearlplus/load", ctx -> {
@@ -221,5 +227,28 @@ public class PPApiServer {
         List<String> pearls,
         List<String> output,
         String error
+    ) { }
+
+    private BotInfo readZenithBotInfo() {
+        String server = null;
+        String username = null;
+        var config = Globals.CONFIG;
+        if (config != null) {
+            if (config.authentication != null) {
+                username = config.authentication.username;
+            }
+            if (config.client != null && config.client.server != null) {
+                var address = config.client.server.address;
+                if (address != null && !address.isBlank()) {
+                    server = address;
+                }
+            }
+        }
+        return new BotInfo(server, username);
+    }
+
+    private record BotInfo(
+        String minecraftServer,
+        String botUsername
     ) { }
 }

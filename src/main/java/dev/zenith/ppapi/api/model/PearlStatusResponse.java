@@ -4,5 +4,7 @@ import java.util.List;
 
 public record PearlStatusResponse(
     List<String> pearls,
-    List<String> output
+    List<String> output,
+    String minecraftServer,
+    String botUsername
 ) { }
