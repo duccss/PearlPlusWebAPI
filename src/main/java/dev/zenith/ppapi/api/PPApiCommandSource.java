@@ -21,5 +21,6 @@ public class PPApiCommandSource implements CommandSource {
     @Override
     public void logEmbed(final CommandContext commandContext, final Embed embed) {
         CommandOutputHelper.logEmbedOutputToTerminal(embed);
+        CommandOutputHelper.logEmbedOutputToDiscord(embed);
     }
 }

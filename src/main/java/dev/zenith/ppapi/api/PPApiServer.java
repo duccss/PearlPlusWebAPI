@@ -5,6 +5,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.zenith.Globals;
 import com.zenith.command.api.CommandContext;
+import com.zenith.command.api.CommandOutputHelper;
 import dev.zenith.ppapi.api.model.ApiErrorResponse;
 import dev.zenith.ppapi.api.model.PearlLoadRequest;
 import dev.zenith.ppapi.api.model.PearlLoadResponse;
@@ -153,6 +154,8 @@ public class PPApiServer {
         LOG.info("PP API executed command: {}", command);
         Globals.COMMAND.execute(context);
         context.getSource().logEmbed(context, context.getEmbed());
+        CommandOutputHelper.logMultiLineOutputToTerminal(context.getMultiLineOutput());
+        CommandOutputHelper.logMultiLineOutputToDiscord(context.getMultiLineOutput());
         return context;
     }
 
