@@ -29,8 +29,8 @@ dependencies {
     shade("io.javalin:javalin:6.7.0")
 
     // todo: remove when javalin updates to jackson 3
-    shade("com.fasterxml.jackson.core:jackson-core:2.20.1")
-    shade("com.fasterxml.jackson.core:jackson-databind:2.20.1")
+    shade("com.fasterxml.jackson.core:jackson-core:2.21.1")
+    shade("com.fasterxml.jackson.core:jackson-databind:2.21.1")
     shade("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.20.1")
 }
 
